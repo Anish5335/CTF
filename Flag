@@ -1,0 +1,39 @@
+package CTF;
+
+
+import zen.core.Zen;
+import zen.game.Sprite;
+import zen.shape.Rectangle;
+
+
+public class Flag extends Sprite {
+	
+	Rectangle r;
+	String team = "red";
+
+	@Override
+	public void setup() {
+		r = new Rectangle(40, 40);
+		
+		
+	}
+
+	@Override
+	public void draw() {
+		r.setColor(team);
+		r.draw();
+		
+		
+	}
+
+	@Override
+	public void move() {
+		setX( Zen.readInt(team + "x"));
+		setY( Zen.readInt(team + "y"));
+		
+		r.follow(this);
+		
+		
+	}
+
+}
