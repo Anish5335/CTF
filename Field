@@ -1,0 +1,91 @@
+package CTF;
+
+import zen.core.Zen;
+import zen.game.Game;
+
+public class Field extends Game {
+
+	Player keshav;
+	Player rahul;
+	Player anish;
+	Player anoop;
+	Player kaushik;
+
+	Flag redflag;
+	Flag blueflag;
+
+	public static void main(String[] args) {
+		Zen.connect();
+		Field f = new Field();
+		f.setSize(1000, 500);
+		f.run();
+
+	}
+
+	@Override
+	public void setup() {
+		// Set up all the people
+		keshav = new Player();
+		keshav.gamertag = "rhino";
+		anish = new Player();
+		anish.gamertag = "idontknow";
+		anish.control = true;
+		anoop = new Player();
+		anoop.gamertag = "anoopdogg";
+		rahul = new Player();
+		rahul.gamertag = "panda";
+		rahul.team = "red";
+		kaushik = new Player();
+		kaushik.gamertag = "airplane";
+		kaushik.team = "red";
+
+
+		// Set up the flags
+		redflag = new Flag();
+		blueflag = new Flag();
+		blueflag.team = "blue";
+
+		addSprite(anish, 250, 250);	
+		addSprite(kaushik);		
+		addSprite(anoop);	
+		addSprite(rahul);
+		addSprite(keshav);
+
+
+		addSprite(redflag);
+		addSprite(blueflag);
+
+
+
+	}
+
+	@Override
+	public void loop() {
+		Zen.setBackground("green");
+		Zen.setColor("white");
+		Zen.fillRect(499, 0, 2, 500);
+		System.out.println(anish);
+		Zen.write("idontknowx", anish.getX());
+		Zen.write("idontknowy", anish.getY());
+
+		String owner = Zen.read("blueowner");
+
+		if (anish.distanceTo(redflag) < 20 && owner.equals("nobody" ) ) {
+			Zen.write("redowner", "idontknow");
+		}
+		if ( owner.equals("idontknow") ) {
+			Zen.write("redx", anish.getX());
+			Zen.write("redy", anish.getY());
+
+			if (anish.getX() > 500) {
+				Zen.write("bluex", 25);
+				Zen.write("bluey", 250);
+				Zen.write("blueowner", "nobody");
+			}
+		}
+
+		if (anish.getX() < 500 &&  )
+
+	}
+
+}
