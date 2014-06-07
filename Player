@@ -1,0 +1,61 @@
+package CTF;
+
+import zen.core.Zen;
+import zen.game.Sprite;
+import zen.shape.Circle;
+
+public class Player extends Sprite {
+	
+	Circle c; 
+	String gamertag;
+	String team = "blue"; 
+	boolean control = false; 
+	
+
+	@Override
+	public void setup() {
+		c = new Circle(30);
+		c.setColor("blue");		
+	}
+
+	@Override
+	public void draw() {
+		c.setColor(team);
+		c.draw(); 
+		Zen.setColor("black");
+		Zen.drawText(gamertag, getX() - 20, getY() - 15);
+	
+		
+	}
+
+	@Override
+	public void move() {
+		c.follow(this);
+		
+		if ( control ) {
+			if ( Zen.isKeyPressed("left") && getX() > 0 ) {
+				changeX(-10);
+			}
+			if ( Zen.isKeyPressed("right") && getX() < 1000 ) {
+				changeX(10);
+			}
+			if ( Zen.isKeyPressed("up") && getY() > 0 ) {
+				changeY(-10);
+			}
+			if ( Zen.isKeyPressed("down") && getY() < 500 ) {
+				changeY(10);
+			}
+		}
+		else {
+			setX(Zen.readInt(gamertag + "x") );
+			setY(Zen.readInt(gamertag + "y") );
+	
+			
+		}
+	}
+	
+}
+
+		
+
+		
